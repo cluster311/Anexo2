@@ -35,4 +35,10 @@ class Anexo2:
 if __name__ == '__main__':
     a2 = Anexo2()
     save_to = os.path.join(a2.templates_folder, 'res.html')
-    a2.get_html(data={}, save_path=save_to)
+
+    data ={'dia': '03',
+           'mes': '09',
+           'anio': '2019'
+            }
+
+    a2.get_html(data=data, save_path=save_to)
