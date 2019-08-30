@@ -1,0 +1,7 @@
+*.pyc
+*.pyo
+*.json
+*.csv
+__pycache__
+build/
+cie.egg-info/

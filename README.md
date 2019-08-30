@@ -12,5 +12,38 @@ Art. 2° — Los Hospitales Públicos de Gestión Descentralizada deberán
   con la correspondiente suscripción o firma del beneficiario, 
   familiar o responsable.
 ```
+Documento original usado de base [acá](originales/Anexo-II-RESOLUCION-487-2002.gif).  
+
+## Herramienta desarrollada
+
+Este instrumento toma un diccionario con datos y genera un HTML listo para imprimir, firmar y sellar.  
+
+## Instalacion 
+
+```
+pip install anexo2
+```
+
+## Uso
+
+```python
+hostpital = {}
+beneficiario = {}
+obra_social = {}
+data = {
+  'hospital': hostpital,
+  'beneficiario': beneficiario,
+  'obra_social': obra_social
+}
+from anexo2.docs import Anexo2
+anx = Anexo2(data=data)
+print(anx.get_html())
+```
+
+Resultado
+```html
+<html>
+</html>
+```
 
 
