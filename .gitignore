@@ -6,3 +6,4 @@ __pycache__
 build/
 cie.egg-info/
 anexo2/templates/res.html
+path.html
