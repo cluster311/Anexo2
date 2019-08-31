@@ -11,13 +11,10 @@
         border: 1px solid black;
         text-align: center;
         padding: 5px;
-        display: inline;
-
     }
     .row {
         display: block;
-        width: 100%;
-        margin: 0px;
+        margin: 10px;
     }
     
     
@@ -38,8 +35,53 @@
 </div>
 
 <div class='row'>
-    <div>Coso 2</div>
-    <div>El segundo</div>
+    <div>Hospital</div>
+    <div>{{ hospital.nombre }}</div>
+    <div>{{ hospital.codigo_hpgd }}</div>
+</div>
+
+<div class='row'>
+    <div>Benficiario</div>
+    <div>{{ beneficiario.apellido_y_nombres }}</div>
+    <div>{{ beneficiario.tipo_dni }}</div>
+    <div>{{ beneficiario.dni }}</div>
+    <div>{{ beneficiario.tipo_beneficiario }}</div>
+    <div>{{ beneficiario.parentesco }}</div>
+    <div>{{ beneficiario.sexo }}</div>
+    <div>{{ beneficiario.edad }}</div>
+</div>
+
+<div class='row'>
+    <div>Atencion</div>
+    <div>{{ atencion.tipo }}</div>
+    <div>{{ atencion.especialidad }}</div>
+    <div>{{ atencion.codigos_N_HPGD }}</div>
+    <div>{{ atencion.fecha.dia }} {{ atencion.fecha.mes }} {{ atencion.fecha.anio }}</div>
+    <div>{{ atencion.diagnostico_ingreso_cie10.principal }}</div>
+    <ul>
+        <li>{{ atencion.diagnostico_ingreso_cie10.otros.0 }}</li>
+        <li>{{ atencion.diagnostico_ingreso_cie10.otros.1 }}</li>
+        <li>{{ atencion.diagnostico_ingreso_cie10.otros.2 }}</li>
+    </ul>
+    
+</div>
+
+<div class='row'>
+    <div>Obra social</div>
+    <div>{{ obra_social.codigo_rnos }}</div>
+    <div>{{ obra_social.nombre }}</div>
+    <div>{{ obra_social.nro_carnet_obra_social }}</div>
+    <div>{{ obra_social.fecha_de_emision.dia }} {{ obra_social.fecha_de_emision.mes }} {{ obra_social.fecha_de_emision.anio }}</div>
+    <div>{{ obra_social.fecha_de_vencimiento.dia }} {{ obra_social.fecha_de_vencimiento.mes }} {{ obra_social.fecha_de_vencimiento.anio }}</div>
+    
+</div>
+
+<div class='row'>
+    <div>Empresa</div>
+    <div>{{ empresa.nombre }}</div>
+    <div>{{ empresa.direccion }}</div>
+    <div>{{ empresa.ultimo_recibo_de_sueldo.dia }} {{ empresa.ultimo_recibo_de_sueldo.mes }} {{ empresa.ultimo_recibo_de_sueldo.anio }}</div>
+    <div>{{ empresa.cuit }}</div>
 </div>
 
     </div>
