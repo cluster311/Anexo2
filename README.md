@@ -75,10 +75,11 @@ else:
     print(f'Procesado correctamente y grabado en {save_to}')
 ```
 
-## validación de los datos
-Internamente se usa la librería [cerberus](https://docs.python-cerberus.org/en/stable/validation-rules.html) para validar los datos. Ninguno de los campos es requerido y los que estén ausentes no se completarán en el html.  
+## Validación de los datos
+Internamente se usa la librería [cerberus](https://docs.python-cerberus.org/en/stable/validation-rules.html) para validar los datos.  
+**Ninguno de los campos es requerido** y los que estén ausentes no se completarán en el html.  
 
-Aquí se puede ver el esquema requerido: 
+Aquí se puede ver el esquema de validación: 
 
 ```python
 from anexo2.docs import Anexo2
