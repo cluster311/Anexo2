@@ -4,6 +4,7 @@
 *.csv
 __pycache__
 build/
-cie.egg-info/
+dist/
+*.egg-info/
 anexo2/templates/res.html
 path.html
