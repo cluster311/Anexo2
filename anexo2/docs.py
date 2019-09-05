@@ -1,23 +1,23 @@
 import os
-from jinja2 import Template
+from jinja2 import Template, FileSystemLoader, Environment
 # validacion con cerberus https://docs.python-cerberus.org/en/stable/usage.html
 from cerberus import Validator
-
 
 class Anexo2:
     """ Generacion del Anexo II """
 
     here = os.path.dirname(os.path.realpath(__file__))
     templates_folder = os.path.join(here, 'templates')
-    default_template = os.path.join(templates_folder, 'Anexo-II-RESOLUCION-487-2002.html')
 
     errors = {}  # errores al procesar los datos {campo: error}
 
     def __init__(self, data):
         self.validator = Validator(self.get_schema())
         self.data = data
+        loader = FileSystemLoader(self.templates_folder)
+        self.jinja_environment = Environment(loader=loader)
 
-    def get_html(self, template_path=None, save_path=None):
+    def get_html(self, template_name='anexo2', save_path=None):
         """
         recibe los datos a "dibujar", graba el HTML (si se lo pide)
         y devuelve:
@@ -26,16 +26,15 @@ class Anexo2:
         TODO generar PDF: https://github.com/fdemmer/django-weasyprint
         """
         data = self.data
-        if template_path is None:
-            template_path = self.default_template
-
+        
         res, errors = self.validate_data(data=data)
         if not res:
             self.errors = errors
             return None
+        
+        data = self.post_process_data(data=data)
 
-        f = open(template_path)
-        template = Template(f.read())
+        template = self.jinja_environment.get_template(f'{template_name}.html')
         html = template.render(**data)
         if save_path is not None:
             f = open(save_path, 'w')
@@ -48,6 +47,57 @@ class Anexo2:
         # validate
         r = self.validator.validate(data)
         return r, self.validator.errors
+    
+    def _str_to_boxes(self, txt, total_boxes, fill_with=''):
+        # fit a text in a group of boxes
+        if type(txt) != str:
+            txt = str(txt)
+        
+        # if len(txt) > total_boxes:
+        #    raise Exception('{txt} no entra en {total_boxes} boxes')
+            
+        ret = [fill_with for r in range(total_boxes - len(txt))]
+        ret += list(txt)
+        
+        return ret
+        
+    def post_process_data(self, data):
+        # improve data for render template
+
+        # prepare edad in three parts to fix in -> EDAD: [][][]
+        edad = data.get('beneficiario', {}).get('edad', None)
+        data['beneficiario']['__edad'] = self._str_to_boxes(txt=edad, total_boxes=3)
+        
+        rnos = data['obra_social']['codigo_rnos']
+        data['obra_social']['__codigo_rnos'] = self._str_to_boxes(txt=rnos, total_boxes=6)
+        
+        noss = data['obra_social']['nro_carnet_obra_social']
+        data['obra_social']['__nro_carnet_obra_social'] = self._str_to_boxes(txt=noss, total_boxes=17)
+
+        fed = data['obra_social']['fecha_de_emision']['dia']
+        data['obra_social']['__fed'] = self._str_to_boxes(txt=fed, total_boxes=2, fill_with='0')
+
+        fem = data['obra_social']['fecha_de_emision']['mes']
+        data['obra_social']['__fem'] = self._str_to_boxes(txt=fem, total_boxes=2, fill_with='0')
+
+        fea = data['obra_social']['fecha_de_emision']['anio']
+        data['obra_social']['__fea'] = self._str_to_boxes(txt=fea, total_boxes=4, fill_with='')
+
+        fvm = data['obra_social']['fecha_de_vencimiento']['mes']
+        data['obra_social']['__fvm'] = self._str_to_boxes(txt=fvm, total_boxes=2, fill_with='0')
+
+        fva = data['obra_social']['fecha_de_vencimiento']['anio']
+        data['obra_social']['__fva'] = self._str_to_boxes(txt=fva, total_boxes=4, fill_with='')
+        
+        ursm = data['empresa']['ultimo_recibo_de_sueldo']['mes']
+        data['empresa']['__ursm'] = self._str_to_boxes(txt=ursm, total_boxes=2, fill_with='0')
+
+        ursa = data['empresa']['ultimo_recibo_de_sueldo']['anio']
+        data['empresa']['__ursa'] = self._str_to_boxes(txt=ursa, total_boxes=4, fill_with='')
+
+        
+
+        return data
 
     def get_schema(self):
         schema = {
@@ -142,8 +192,6 @@ class Anexo2:
         return schema
 
 if __name__ == '__main__':
-    a2 = Anexo2()
-    save_to = os.path.join(a2.templates_folder, 'res.html')
 
     data = {'dia': 3,
             'mes': 9,
@@ -154,12 +202,12 @@ if __name__ == '__main__':
                 },
             'beneficiario': {
                 'apellido_y_nombres': 'Juan Perez',
-                'tipo_dni': 'DNI',  # | LE | LC
+                'tipo_dni': 'LE',  # DNI | LE | LC
                 'dni': '34100900',
                 'tipo_beneficiario': 'titular',  # | no titular | adherente
                 'parentesco': 'conyuge',  # hijo | otro
                 'sexo': 'M',  # | F
-                'edad': 88,
+                'edad': 38,
                 },
             'atencion': {
                 'tipo': 'consulta',  # | practica | internacion
@@ -171,19 +219,21 @@ if __name__ == '__main__':
             'obra_social': {
                 'codigo_rnos': '800501',
                 'nombre': 'OBRA SOCIAL ACEROS PARANA',
-                'nro_carnet_obra_social': '9134818283929101',
+                'nro_carnet_obra_social': '12345678901234567890',
                 'fecha_de_emision': {'dia': 11, 'mes': 9, 'anio': 2009},
                 'fecha_de_vencimiento': {'dia': 11, 'mes': 9, 'anio': 2029}
                 },
             'empresa': {
                 'nombre': 'Telescopios Hubble',
                 'direccion': 'Av Astronómica s/n',
-                'ultimo_recibo_de_sueldo': {'mes': 7, 'anio': 2019},
+                'ultimo_recibo_de_sueldo': {'mes': 7, 'anio': 2017},
                 'cuit': '31-91203043-8'
                 }
         }
 
-    res = a2.get_html(data=data, save_path=save_to)
+    a2 = Anexo2(data=data)
+    save_to = os.path.join(a2.templates_folder, 'res.html')
+    res = a2.get_html(save_path=save_to)
     if res is None:
         print('ERRORES al procesar pedido')
         for field, error in a2.errors.items():
