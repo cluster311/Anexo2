@@ -18,6 +18,10 @@ Documento original usado de base [acá](originales/Anexo-II-RESOLUCION-487-2002.
 
 Este instrumento toma un diccionario con datos y genera un HTML listo para imprimir, firmar y sellar. 
 
+## Muestra
+
+![anexo II](imgs/muestra_anexo_ii.png)
+
 ## Instalacion 
 
 ```
