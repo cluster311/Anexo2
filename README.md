@@ -73,7 +73,7 @@ save_to = 'path.html'
 res = anx.get_html(save_path=save_to)
 if res is None:
     print('ERRORES al procesar pedido')
-    for field, error in a2.errors.items():
+    for field, error in anx.errors.items():
         print(f' - {field}: {error}')
 else:
     print(f'Procesado correctamente y grabado en {save_to}')

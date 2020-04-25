@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='anexo2',
-     version='0.101',
+     version='0.103',
      license='MIT',
      author="Andres Vazquez",
      author_email="andres@data99.com.ar",
@@ -16,7 +16,8 @@ setuptools.setup(
      long_description_content_type="text/markdown",
      url="https://github.com/cluster311/Anexo2",
      install_requires=[
-        'cerberus>=1.3'
+        'cerberus>=1.3',
+        'jinja2'
      ],
      include_package_data=True,  # for html file
      packages=['anexo2'],  # setuptools.find_packages(),
