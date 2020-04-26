@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cluster311/Anexo2.svg?branch=master)](https://travis-ci.org/cluster311/Anexo2)
+
 # Anexo II
 Generación para impresión del "Comprobante de Atención de Beneficiarios de Obras Sociales" (Conocido como Anexo II).  
 Según [Resolucion 487/2002](http://servicios.infoleg.gob.ar/infolegInternet/anexos/75000-79999/77280/texact.htm).  
@@ -23,6 +25,8 @@ Este instrumento toma un diccionario con datos y genera un HTML listo para impri
 ![anexo II](imgs/muestra_anexo_ii.png)
 
 ## Instalacion 
+
+[![pypi link](imgs/pypi.svg)](https://pypi.org/project/anexo2/)
 
 ```
 pip install anexo2
