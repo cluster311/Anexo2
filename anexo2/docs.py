@@ -127,7 +127,14 @@ class Anexo2:
             'atencion': {
                 'type': 'dict',
                 'schema': {
-                    'tipo': {'type': 'string', 'allowed': ['consulta', 'practica', 'internacion']}, 
+                    'tipo': {'type': 'string', 'allowed': ['consulta', 'practica', 'internacion']},
+                    'profesional': {
+                        'type': 'dict',
+                        'schema': {
+                            'apellido_y_nombres': {'type': 'string'},
+                            'matricula_profesional': {'type': 'string'},
+                        },
+                    },
                     'especialidad': {'type': 'string'},
                     'codigos_N_HPGD': {'type': 'list'},
                     'fecha': {
@@ -211,6 +218,10 @@ if __name__ == '__main__':
                 },
             'atencion': {
                 'tipo': 'consulta',  # | practica | internacion
+                'profesional': {
+                    'apellido_y_nombres': 'Adolfo Martínez',
+                    'matricula_profesional': '10542',
+                },
                 'especialidad': 'Va un texto al parecer largo, quizas sea del nomenclador',
                 'codigos_N_HPGD': ['AA01', 'AA02', 'AA06', 'AA07'],  # no se de donde son estos códigos
                 'fecha': {'dia': 3, 'mes': 9, 'anio': 2019},
@@ -240,4 +251,3 @@ if __name__ == '__main__':
             print(f' - {field}: {error}')
     else:
         print(f'Procesado correctamente y grabado en {save_to}')
-        
