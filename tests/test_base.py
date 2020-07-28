@@ -15,6 +15,10 @@ def test_base():
                     'edad': 88}
     atencion = {'tipo': 'consulta',  # | practica | internacion
                 'especialidad': 'Va un texto al parecer largo, quizas sea del nomenclador',
+                'profesional': {
+                    'apellido_y_nombres': 'MARTÍNEZ, Adolfo',
+                    'matricula_profesional': '10542',
+                },
                 'codigos_N_HPGD': ['AA01', 'AA02', 'AA06', 'AA07'],  # no se de donde son estos códigos
                 'fecha': {'dia': 3, 'mes': 9, 'anio': 2019},
                 'diagnostico_ingreso_cie10': {'principal': 'W020', 'otros': ['w021', 'A189']}}
