@@ -127,7 +127,7 @@ class Anexo2:
             'atencion': {
                 'type': 'dict',
                 'schema': {
-                    'tipo': {'type': 'list', 'allowed': ['consulta', 'practica', 'internacion']},
+                    'tipo': {'type': 'list', 'allowed': ['consulta', 'práctica', 'internación']},
                     'profesional': {
                         'type': 'dict',
                         'schema': {
@@ -217,7 +217,7 @@ if __name__ == '__main__':
                 'edad': 38,
                 },
             'atencion': {
-                'tipo': ['consulta', 'practica', 'internacion'],
+                'tipo': ['consulta', 'práctica', 'internación'],
                 'profesional': {
                     'apellido_y_nombres': 'Adolfo Martínez',
                     'matricula_profesional': '10542',

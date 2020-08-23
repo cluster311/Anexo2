@@ -46,7 +46,7 @@ beneficiario = {'apellido_y_nombres': 'Juan Perez',
                 'parentesco': 'conyuge',  # hijo | otro
                 'sexo': 'M',  # | F
                 'edad': 88}
-atencion = {'tipo': 'consulta',  # | practica | internacion
+atencion = {'tipo': ['consulta', 'práctica', 'internación'],
             'especialidad': 'Va un texto al parecer largo, quizas sea del nomenclador',
             'codigos_N_HPGD': ['AA01', 'AA02', 'AA06', 'AA07'],  # no se de donde son estos códigos
             'fecha': {'dia': 3, 'mes': 9, 'anio': 2019},
@@ -160,7 +160,7 @@ anx.get_schema()
 		'schema': {
 			'tipo': {
 				'type': 'string',
-				'allowed': ['consulta', 'practica', 'internacion']
+				'allowed': ['consulta', 'práctica', 'internación']
 			},
 			'especialidad': {
 				'type': 'string'
