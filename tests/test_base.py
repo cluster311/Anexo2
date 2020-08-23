@@ -13,7 +13,7 @@ def test_base():
                     'parentesco': 'conyuge',  # hijo | otro
                     'sexo': 'M',  # | F
                     'edad': 88}
-    atencion = {'tipo': 'consulta',  # | practica | internacion
+    atencion = {'tipo': ['consulta', 'practica', 'internacion'],
                 'especialidad': 'Va un texto al parecer largo, quizas sea del nomenclador',
                 'profesional': {
                     'apellido_y_nombres': 'MARTÍNEZ, Adolfo',
