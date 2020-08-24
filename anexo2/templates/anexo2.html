@@ -159,7 +159,7 @@
       <tr style='height:20px;'>
          
         <td class="s0" dir="ltr" colspan="5" rowspan="2" style="border-left: 1px SOLID #000000;"> CONSULTA</td>
-        <td class="s5" colspan="2" rowspan="2">{% if atencion.tipo == 'consulta' %}X{% endif %}</td>
+        <td class="s5" colspan="2" rowspan="2">{% if 'consulta' in atencion.tipo %}X{% endif %}</td>
         <td class="s5" rowspan="6"></td>
         <td class="s4" dir="ltr" colspan="5" rowspan="2">Especialidad</td>
         <td class="f5 s5" colspan="20" rowspan="2">{{ atencion.especialidad }}</td>
@@ -172,8 +172,8 @@
       </tr>
       <tr style='height:20px;'>
         
-        <td class="s0" dir="ltr" colspan="5" rowspan="2" style="border-left: 1px SOLID #000000;"> PRACTICA</td>
-        <td class="s2" colspan="2" rowspan="2">{% if atencion.tipo == 'practica' %}X{% endif %}</td>
+        <td class="s0" dir="ltr" colspan="5" rowspan="2" style="border-left: 1px SOLID #000000;"> PRÁCTICA</td>
+        <td class="s2" colspan="2" rowspan="2">{% if 'práctica' in atencion.tipo %}X{% endif %}</td>
         <td class="s1" dir="ltr" colspan="5" rowspan="2">Códigos de<br>N.HPGD</td>
         
         <td class="s2" colspan="3" rowspan="2">{{ atencion.codigos_N_HPGD[0] }}</td>
@@ -192,7 +192,7 @@
       <tr style='height:20px;'>
          
         <td class="s0" dir="ltr" colspan="5" rowspan="2" style="border-left: 1px SOLID #000000;"> INTERNAC</td>
-        <td class="s2" colspan="2" rowspan="2">{% if atencion.tipo == 'internacion' %}X{% endif %}</td>
+        <td class="s2" colspan="2" rowspan="2">{% if 'internación' in atencion.tipo %}X{% endif %}</td>
         <td class="s1" dir="ltr" colspan="9" rowspan="2">DIAGNOSTICO DE EGRESO<br>CIE 10</td>
         <td class="s1" dir="ltr" colspan="5" rowspan="2">CODIGO <br>PRINCIPAL</td>
         <td class="s2" colspan="5" rowspan="2">{{ atencion.diagnostico_ingreso_cie10.principal }}</td>
