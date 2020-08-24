@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.org/cluster311/Anexo2.svg?branch=master)](https://travis-ci.org/cluster311/Anexo2)
-
+[![GitHub All Releases](https://img.shields.io/github/downloads/cluster311/Anexo2/total)](https://github.com/cluster311/Anexo2/releases)
+[![GitHub Issues](https://img.shields.io/github/issues/cluster311/Anexo2)](https://github.com/cluster311/Anexo2/issues)
+[![GitHub PR](https://img.shields.io/github/issues-pr/cluster311/Anexo2)](https://github.com/cluster311/Anexo2/pulls)
+[![Licence](https://img.shields.io/github/license/cluster311/Anexo2)](https://github.com/cluster311/Anexo2/blob/master/LICENSE)
+[![PyPi version](https://img.shields.io/pypi/v/anexo2)](https://pypi.org/project/anexo2/)
+[![Pypi py version](https://img.shields.io/pypi/pyversions/anexo2)](https://pypi.org/project/anexo2/)
+[![Last Commit](https://img.shields.io/github/last-commit/cluster311/Anexo2)](https://github.com/cluster311/Anexo2/commits/master)
 # Anexo II
 Generación para impresión del "Comprobante de Atención de Beneficiarios de Obras Sociales" (Conocido como Anexo II).  
 Según [Resolucion 487/2002](http://servicios.infoleg.gob.ar/infolegInternet/anexos/75000-79999/77280/texact.htm).  
