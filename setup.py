@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
      name='anexo2',
-     version='1.0.20',
+     version='1.0.21',
      license='MIT',
      author="Andres Vazquez",
      author_email="andres@data99.com.ar",

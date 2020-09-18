@@ -89,13 +89,19 @@ class Anexo2:
         fva = data['obra_social']['fecha_de_vencimiento']['anio']
         data['obra_social']['__fva'] = self._str_to_boxes(txt=fva, total_boxes=4, fill_with='')
         
-        ursm = data['empresa']['ultimo_recibo_de_sueldo']['mes']
-        data['empresa']['__ursm'] = self._str_to_boxes(txt=ursm, total_boxes=2, fill_with='0')
+        # En caso de no existir los valores se pasan strings vacíos al HTML
+        try:
+            ursm = data['empresa']['ultimo_recibo_de_sueldo']['mes']
+            data['empresa']['__ursm'] = self._str_to_boxes(txt=ursm, total_boxes=2, fill_with='0')
+        except KeyError:
+            data['empresa']['__ursm'] = self._str_to_boxes(txt='', total_boxes=2, fill_with='')
 
-        ursa = data['empresa']['ultimo_recibo_de_sueldo']['anio']
-        data['empresa']['__ursa'] = self._str_to_boxes(txt=ursa, total_boxes=4, fill_with='')
+        try:
+            ursa = data['empresa']['ultimo_recibo_de_sueldo']['anio']
+            data['empresa']['__ursa'] = self._str_to_boxes(txt=ursa, total_boxes=4, fill_with='')
+        except KeyError:
+            data['empresa']['__ursa'] = self._str_to_boxes(txt='', total_boxes=4, fill_with='')
 
-        
 
         return data
 
@@ -180,6 +186,7 @@ class Anexo2:
                 },
             'empresa': {
                 'type': 'dict',
+                'nullable': True,
                 'schema': {
                     'nombre': {'type': 'string'},
                     'direccion': {'type': 'string'},
