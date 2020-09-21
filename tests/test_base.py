@@ -76,7 +76,8 @@ def test_empresa_incompleta(anexo2_data):
         'empresa': {
                 'nombre': 'Telescopios Hubble',
                 'direccion': 'Av Astronómica s/n',
-                'cuit': '31-91203043-8'
+                'cuit': '31-91203043-8',
+                'ultimo_recibo_de_sueldo': {'mes': None, 'anio': None},
             }
     }
 

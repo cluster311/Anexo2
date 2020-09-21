@@ -193,9 +193,8 @@ class Anexo2:
                     'ultimo_recibo_de_sueldo': {
                         'type': 'dict',
                         'schema': {
-                            'dia': {'type': 'integer', 'min': 1, 'max': 31},
-                            'mes': {'type': 'integer', 'min': 1, 'max': 12},
-                            'anio': {'type': 'integer', 'min': 1970, 'max': 2030}
+                            'mes': {'type': 'integer', 'nullable': True, 'min': 1, 'max': 12},
+                            'anio': {'type': 'integer', 'nullable': True, 'min': 1970, 'max': 2030}
                             }
                         },
                     'cuit': {'type': 'string'}
