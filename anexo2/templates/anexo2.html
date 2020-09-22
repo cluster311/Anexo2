@@ -162,10 +162,10 @@
         <td class="s5" colspan="2" rowspan="2">{% if 'consulta' in atencion.tipo %}X{% endif %}</td>
         <td class="s5" rowspan="6"></td>
         <td class="s4" dir="ltr" colspan="5" rowspan="2">Especialidad</td>
-        <td class="f5 s5" colspan="20" rowspan="2">{{ atencion.especialidad }}</td>
-        <td class="s5" colspan="2" rowspan="2">{{ atencion.fecha.dia }}</td>
-        <td class="s5" colspan="2" rowspan="2">{{ atencion.fecha.mes }}</td>
-        <td class="s5" colspan="2" rowspan="2">{{ atencion.fecha.anio }}</td>
+        <td class="f5 s5" colspan="20" rowspan="2">{{ atencion.especialidad|default('', true) }}</td>
+        <td class="s5" colspan="2" rowspan="2">{{ atencion.fecha.dia|default('', true) }}</td>
+        <td class="s5" colspan="2" rowspan="2">{{ atencion.fecha.mes|default('', true) }}</td>
+        <td class="s5" colspan="2" rowspan="2">{{ atencion.fecha.anio|default('', true) }}</td>
       </tr>
       <tr style='height:20px;'>
         
@@ -212,7 +212,7 @@
       
       <tr style='height:20px;'>
         <td class="s4" dir="ltr" colspan="39" style="border-left: 1px SOLID #000000;">
-          Firma del Médico y Sello con Nº de Matrícula - {{ atencion.profesional.apellido_y_nombres }} - MP.: {{ atencion.profesional.matricula_profesional }}
+          Firma del Médico y Sello con Nº de Matrícula - {{ atencion.profesional.apellido_y_nombres }} - MP.: {{ atencion.profesional.matricula_profesional|default('', true) }}
         </td>
       </tr>
       

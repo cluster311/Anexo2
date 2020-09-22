@@ -49,6 +49,24 @@ class Anexo2:
         return r, self.validator.errors
     
     def _str_to_boxes(self, txt, total_boxes, fill_with=''):
+        """
+            Toma un str (día, mes, año) y lo convierte en una lista
+            de caractéres para ser renderizado en el template.
+
+            Si `txt` ocupa menos que `total_boxes` se llena 
+            con `fill_with` lo que sobra.
+        """
+
+        # En caso de que txt sea None pasamos una lista vacía al template
+        if txt is None:
+            txt = ''
+            fill_with = ''
+
+            ret = [fill_with for r in range(total_boxes - len(txt))]
+            ret += list(txt)
+
+            return ret
+
         # fit a text in a group of boxes
         if type(txt) != str:
             txt = str(txt)
@@ -127,35 +145,38 @@ class Anexo2:
                     'tipo_beneficiario': {'type': 'string', 'allowed': ['titular', 'no titular', 'adherente']},
                     'parentesco': {'type': 'string', 'allowed': ['conyuge', 'hijo', 'otro']},
                     'sexo': {'type': 'string', 'allowed': ['F', 'M']},
-                    'edad': {'type': 'integer', 'min': 0, 'max': 110}
+                    'edad': {'type': 'integer', 'nullable': True, 'min': 0, 'max': 110}
                     }
                 },
             'atencion': {
                 'type': 'dict',
                 'schema': {
-                    'tipo': {'type': 'list', 'allowed': ['consulta', 'práctica', 'internación']},
+                    'tipo': {
+                        'type': 'list',
+                        'allowed': ['consulta', 'práctica', 'internación']
+                    },
                     'profesional': {
                         'type': 'dict',
                         'schema': {
                             'apellido_y_nombres': {'type': 'string'},
-                            'matricula_profesional': {'type': 'string'},
+                            'matricula_profesional': {'type': 'string', 'nullable': True,},
                         },
                     },
-                    'especialidad': {'type': 'string'},
-                    'codigos_N_HPGD': {'type': 'list'},
+                    'especialidad': {'type': 'string', 'nullable': True,},
+                    'codigos_N_HPGD': {'type': 'list', 'nullable': True,},
                     'fecha': {
                         'type': 'dict',
                         'schema': {
-                            'dia': {'type': 'integer', 'min': 1, 'max': 31},
-                            'mes': {'type': 'integer', 'min': 1, 'max': 12},
-                            'anio': {'type': 'integer', 'min': 2019, 'max': 2030}
+                            'dia': {'type': 'integer', 'nullable': True, 'min': 1, 'max': 31},
+                            'mes': {'type': 'integer', 'nullable': True, 'min': 1, 'max': 12},
+                            'anio': {'type': 'integer', 'nullable': True, 'min': 2019, 'max': 2030}
                             }
                         },
                     'diagnostico_ingreso_cie10': {
                         'type': 'dict',
                         'schema': {
                             'principal': {'type': 'string'}, 
-                            'otros': {'type': 'list'}
+                            'otros': {'type': 'list', 'nullable': True,}
                             }
                         }
                     }
@@ -165,21 +186,21 @@ class Anexo2:
                 'schema': {
                     'codigo_rnos': {'type': 'string'},
                     'nombre': {'type': 'string'},
-                    'nro_carnet_obra_social': {'type': 'string'},
+                    'nro_carnet_obra_social': {'type': 'string', 'nullable': True,},
                     'fecha_de_emision': {
                         'type': 'dict',
                         'schema': {
-                            'dia': {'type': 'integer', 'min': 1, 'max': 31},
-                            'mes': {'type': 'integer', 'min': 1, 'max': 12},
-                            'anio': {'type': 'integer', 'min': 1970, 'max': 2030}
+                            'dia': {'type': 'integer', 'nullable': True, 'min': 1, 'max': 31},
+                            'mes': {'type': 'integer', 'nullable': True, 'min': 1, 'max': 12},
+                            'anio': {'type': 'integer', 'nullable': True, 'min': 1970, 'max': 2030}
                             }
                         },
                     'fecha_de_vencimiento': {
                         'type': 'dict',
                         'schema': {
-                            'dia': {'type': 'integer', 'min': 1, 'max': 31},
-                            'mes': {'type': 'integer', 'min': 1, 'max': 12},
-                            'anio': {'type': 'integer', 'min': 2019, 'max': 2030}
+                            'dia': {'type': 'integer', 'nullable': True, 'min': 1, 'max': 31},
+                            'mes': {'type': 'integer', 'nullable': True, 'min': 1, 'max': 12},
+                            'anio': {'type': 'integer', 'nullable': True, 'min': 2019, 'max': 2030}
                             }
                         },
                     }
@@ -189,7 +210,7 @@ class Anexo2:
                 'nullable': True,
                 'schema': {
                     'nombre': {'type': 'string'},
-                    'direccion': {'type': 'string'},
+                    'direccion': {'type': 'string', 'nullable': True,},
                     'ultimo_recibo_de_sueldo': {
                         'type': 'dict',
                         'schema': {
@@ -197,7 +218,7 @@ class Anexo2:
                             'anio': {'type': 'integer', 'nullable': True, 'min': 1970, 'max': 2030}
                             }
                         },
-                    'cuit': {'type': 'string'}
+                    'cuit': {'type': 'string', 'nullable': True,}
                     }
                 }
         }
@@ -228,10 +249,10 @@ if __name__ == '__main__':
                     'apellido_y_nombres': 'Adolfo Martínez',
                     'matricula_profesional': '10542',
                 },
-                'especialidad': 'Va un texto al parecer largo, quizas sea del nomenclador',
+                'especialidad': 'Odontología',
                 'codigos_N_HPGD': ['AA01', 'AA02', 'AA06', 'AA07'],  # no se de donde son estos códigos
                 'fecha': {'dia': 3, 'mes': 9, 'anio': 2019},
-                'diagnostico_ingreso_cie10': {'principal': 'W020', 'otros': ['w021', 'A189']}
+                'diagnostico_ingreso_cie10': {'principal': 'W020', 'otros': ['W021', 'A189']}
                 },
             'obra_social': {
                 'codigo_rnos': '800501',

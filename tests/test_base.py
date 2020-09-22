@@ -87,3 +87,66 @@ def test_empresa_incompleta(anexo2_data):
     anx = Anexo2(data=anexo2_data)
     res = anx.get_html()
     assert res is not None
+
+def test_beneficiario_incompleto(anexo2_data):
+    """ El Anexo2 se genera sin errores con la edad del paciente nula """
+
+    beneficiario_incompleto = {
+        'beneficiario': {
+                'apellido_y_nombres': 'Juan Perez',
+                'tipo_dni': 'LE',  # DNI | LE | LC
+                'dni': '34100900',
+                'tipo_beneficiario': 'titular',  # | no titular | adherente
+                'parentesco': 'conyuge',  # hijo | otro
+                'sexo': 'M',  # | F
+                'edad': None,
+            }
+    }
+
+    anexo2_data.update(beneficiario_incompleto)
+
+    anx = Anexo2(data=anexo2_data)
+    res = anx.get_html()
+    assert res is not None
+
+def test_atencion_incompleta(anexo2_data):
+    """ El Anexo2 se genera sin errores con varios valores nulos en la atención """
+
+    atencion_incompleto = {
+        'atencion': {
+                'tipo': ['consulta', 'práctica', 'internación'],
+                'profesional': {
+                    'apellido_y_nombres': 'Adolfo Martínez',
+                    'matricula_profesional': None,
+                },
+                'especialidad': None,
+                'codigos_N_HPGD': None,
+                'fecha': {'dia': None, 'mes': None, 'anio': None},
+                'diagnostico_ingreso_cie10': {'principal': 'W020', 'otros': None}
+            }
+    }
+
+    anexo2_data.update(atencion_incompleto)
+
+    anx = Anexo2(data=anexo2_data)
+    res = anx.get_html()
+    assert res is not None
+
+def test_obra_social_incompleta(anexo2_data):
+    """ El Anexo2 se genera sin errores con varios valores nulos en la Obra Social """
+
+    obra_social_incompleta = {
+        'obra_social': {
+                'codigo_rnos': '800501',
+                'nombre': 'OBRA SOCIAL ACEROS PARANA',
+                'nro_carnet_obra_social': None,
+                'fecha_de_emision': {'dia': None, 'mes': None, 'anio': None},
+                'fecha_de_vencimiento': {'dia': None, 'mes': None, 'anio': None}
+            }
+    }
+
+    anexo2_data.update(obra_social_incompleta)
+
+    anx = Anexo2(data=anexo2_data)
+    res = anx.get_html()
+    assert res is not None
